@@ -1,5 +1,16 @@
+
+
 # Kube DevOps CI
+
+[![kube-devops-ci-test](https://github.com/codeviewbr/kube-devops-ci/actions/workflows/docker-ci-test.yml/badge.svg?branch=main&event=status)](https://github.com/codeviewbr/kube-devops-ci/actions/workflows/docker-ci-test.yml)
+
 The most important tools for you to run in your infrastructure pipelines as code, whether in kubernt environments or not.
+
+### Image Dockerhub:
+
+```ssh
+codeviewbr/kube-devops-ci:latest
+```
 
 ### Kubernetes Tools
 
@@ -29,4 +40,6 @@ AWS_ACCESS_KEY=""
 AWS_SECRET_KEY=""
 CLUSTER_NAME=""
 KOPS_STATE_STORE=""
+DOCKER_USERNAME=""
+DOCKER_PASSWORD=""
 ```
