@@ -1,0 +1,45 @@
+# action.yml
+name: 'kube-devops-ci'
+description: 'Kubernetes Orchestration tools from using in pipelines'
+author: 'CodeView Consulting'
+branding:
+  icon: 'k8s'
+  color: 'blue'
+inputs:
+  command:
+    description: 'commands avaliable'
+    required: true
+  kubectl:
+    description: 'kubectl version'
+  kustomize:
+    description: 'kustomize version'
+  helm:
+    description: 'helm version'
+  helmv3:
+    description: 'helm version'
+  kubeseal:
+    description: 'kubeseal version'
+  kubeaudit:
+    description: 'kubeaudit version'
+  kubeval:
+    description: 'kubeval version'
+  kops:
+    description: 'kops version'    
+  terraform:
+    description: 'terraform version' 
+  awscli:
+    description: 'aws version'          
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.command }}
+    - ${{ inputs.kubectl }}
+    - ${{ inputs.kustomize }}
+    - ${{ inputs.helm }}
+    - ${{ inputs.helmv3 }}
+    - ${{ inputs.kubeseal }}
+    - ${{ inputs.kubeval }}    
+    - ${{ inputs.kops }}
+    - ${{ inputs.terraform }}  
+    - ${{ inputs.aws }}      

@@ -1,0 +1,19 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: %CA%
+    server: %SERVER%
+  name: %CONTEXT%
+contexts:
+- context:
+    cluster: %CLUSTER%
+    namespace: %NAMESPACE%
+    user: %USERNAME%
+  name: %CONTEXT%
+current-context: %CONTEXT%
+kind: Config
+preferences: {}
+users:
+- name: %USERNAME%
+  user:
+    token: %TOKEN%
