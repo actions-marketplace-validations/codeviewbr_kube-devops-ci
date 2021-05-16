@@ -3,8 +3,8 @@ name: 'kube-devops-ci'
 description: 'Kubernetes Orchestration tools from using in pipelines'
 author: 'CodeView Consulting'
 branding:
-  icon: 'k8s'
-  color: 'blue'
+  icon: 'box'
+  color: 'purple'
 inputs:
   command:
     description: 'commands avaliable'
