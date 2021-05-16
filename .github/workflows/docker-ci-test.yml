@@ -1,6 +1,6 @@
 name: kube-devops-ci
 
-on: [push]
+on: [pull_request]
 
 jobs:
   docker:
@@ -33,14 +33,3 @@ jobs:
           echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
           echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
           echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
-      -
-        name: Build and push
-        uses: docker/build-push-action@v2
-        env:
-          SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
-          SOURCE_NAME: ${{ steps.branch_name.outputs.SOURCE_NAME }}
-          SOURCE_BRANCH: ${{ steps.branch_name.outputs.SOURCE_BRANCH }}
-        with:
-          context: .
-          push: true
-          tags: codeviewbr/kube-devops-ci:$SOURCE_TAG
