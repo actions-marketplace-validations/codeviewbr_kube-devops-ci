@@ -1,4 +1,4 @@
-name: kube-devops-ci
+name: kube-devops-ci-test
 
 on: [pull_request]
 
