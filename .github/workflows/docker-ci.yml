@@ -4,13 +4,9 @@ on:
   # Trigger the workflow on push or pull request,
   # but only for the main branch
   push:
-    branches:
-      - main
-  # Also trigger on page_build, as well as release created events
-  page_build:
-  release:
-    types: # This configuration does not affect the page_build event above
-      - created
+    tags:
+      - 'v*.*.*'
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -19,37 +15,20 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       - 
-        name: Extract tag name
-        id: tag
-        uses: actions/github-script@0.2.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            return context.payload.ref.replace(/\/refs\/tags\//, '');
-
-      - name: Echo
-        run: echo ${{ steps.tag.outputs.result }}        
+        uses: actions/checkout@v1
+        name: Set env
+        run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})     
       -
         name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - 
-        name: Branch name
-        id: branch_name
-        run: |
-          echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
-          echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
-          echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+
       -
         name: Build and push
         uses: docker/build-push-action@v2
-        env:
-          SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
-          SOURCE_NAME: ${{ steps.branch_name.outputs.SOURCE_NAME }}
-          SOURCE_BRANCH: ${{ steps.branch_name.outputs.SOURCE_BRANCH }}
         with:
           context: .
           push: true
-          tags: codeviewbr/kube-devops-ci:$SOURCE_TAG
+          tags: codeviewbr/kube-devops-ci:$RELEASE_VERSION
