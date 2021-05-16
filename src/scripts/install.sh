@@ -13,6 +13,7 @@ less \
 zip \
 unzip \
 sudo \
+git \
 wget \
 bash \
 make \
