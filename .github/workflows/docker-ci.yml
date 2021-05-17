@@ -10,6 +10,7 @@ on:
 jobs:
 
   autotag_repo:
+    name: Auto Tag Project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

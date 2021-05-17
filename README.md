@@ -2,7 +2,7 @@
 
 # Kube DevOps CI
 
-[![kube-devops-ci-test](https://github.com/codeviewbr/kube-devops-ci/actions/workflows/docker-ci-test.yml/badge.svg?branch=main&event=status)](https://github.com/codeviewbr/kube-devops-ci/actions/workflows/docker-ci-test.yml)
+[![kube-devops-ci](https://github.com/codeviewbr/kube-devops-ci/actions/workflows/docker-ci.yml/badge.svg)](https://github.com/codeviewbr/kube-devops-ci/actions/workflows/docker-ci.yml)
 
 The most important tools for you to run in your infrastructure pipelines as code, whether in kubernt environments or not.
 
