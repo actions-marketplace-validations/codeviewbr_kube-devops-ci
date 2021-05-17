@@ -1,10 +1,10 @@
-name: Bump version
+name: Auto Tag
 on:
   push:
     branches:
       - main
 jobs:
-  build:
+  tag_generate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
