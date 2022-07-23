@@ -1,0 +1,20 @@
+name: test-action
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_test_docker_image:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Set kube-ci
+        uses: actions/kube-devops-ci
+        id: vars
+        with:
+          command: aws s3 ls
