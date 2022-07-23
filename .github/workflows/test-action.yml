@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build_test_docker_image:
+  test-image-docker:
     runs-on: ubuntu-latest
     steps:
       -
