@@ -31,7 +31,7 @@ inputs:
     description: 'aws version'          
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'codeviewbr/kube-devops-ci:latest'
   args:
     - ${{ inputs.command }}
     - ${{ inputs.kubectl }}
