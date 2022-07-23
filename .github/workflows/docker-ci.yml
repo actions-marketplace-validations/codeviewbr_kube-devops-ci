@@ -54,7 +54,27 @@ jobs:
         run: |
           echo "codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}"
 
-      - name: Scan image
-        uses: anchore/scan-action@v3
+      - name: Update Action file
+        run: |
+          chmod +x src/scripts/action-version.sh && sh src/scripts/action-version.sh
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
         with:
-          image: "codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}"   
+          image-ref: codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+
+      - name: Update resources
+        uses: test-room-7/action-update-file@v1
+        with:
+            file-path: |
+                ./action.yml
+            commit-msg: Update resources
+            github-token: ${{ secrets.GIT_TOKEN }}             
