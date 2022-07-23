@@ -10,7 +10,7 @@ on:
 jobs:
 
   build_push_image:
-    name: Push Docker image to Docker Hub
+    name: Build and Push Docker
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -30,19 +30,26 @@ jobs:
 
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: Push to Docker Hub
-        uses: docker/build-push-action@v2
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: ${{ steps.tag_version.outputs.new_tag }}
           repository: codeviewbr/kube-devops-ci
           tag_with_ref: true
 
-      - name: test build
+      - name: Show Tag image
         run: |
           echo "codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}"
 
       - name: Scan image
         uses: anchore/scan-action@v3
         with:
-          image: codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}     
+          image: "codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}"   
