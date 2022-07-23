@@ -42,13 +42,7 @@ jobs:
         run: |
           echo "codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}"
 
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-          tags: codeviewbr/kube-devops-ci
-
       - name: Scan image
         uses: anchore/scan-action@v3
         with:
-          image: codeviewbr/kube-devops-ci:latest       
+          image: codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}     
