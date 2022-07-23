@@ -17,4 +17,4 @@ jobs:
         uses: codeviewbr/kube-devops-ci@v0.2.1
         id: vars
         with:
-          command: aws s3 ls
+          command: aws --version
