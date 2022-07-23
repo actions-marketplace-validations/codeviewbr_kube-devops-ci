@@ -47,9 +47,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ${{ steps.tag_version.outputs.new_tag }}
-          repository: codeviewbr/kube-devops-ci
-          tag_with_ref: true
+          tags: codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}
+          context: .
 
       - name: Show Tag image
         run: |
