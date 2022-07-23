@@ -43,3 +43,8 @@ jobs:
         with:
           push: true
           tags: codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.changelog }}
+
+      - name: Scan image
+        uses: anchore/scan-action@v3
+        with:
+          image: codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.changelog }}          

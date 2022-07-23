@@ -44,6 +44,7 @@ aws_config () {
     sed -e "s;%AWS_REGION%;$AWS_REGION;g" /srv/aws-config.tmpl > /root/.aws/config
     sed -e "s;%AWS_ACCESS_KEY%;$AWS_ACCESS_KEY;g" -e "s;%AWS_SECRET_KEY%;$AWS_SECRET_KEY;g" /srv/aws-credentials.tmpl > /root/.aws/credentials
 }
+ 
 echo ''
 verify_files
 echo ''
@@ -52,3 +53,4 @@ echo ''
 aws_config
 echo ''
 echo "🚀 Authentication configured 🚀" >&2
+echo ''
