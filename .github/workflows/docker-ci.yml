@@ -56,7 +56,7 @@ jobs:
 
       - name: Update Action file
         run: |
-          chmod +x src/scripts/action-version.sh && sh src/scripts/action-version.sh
+          chmod +x src/scripts/action-version.sh && sh src/scripts/action-version.sh codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
