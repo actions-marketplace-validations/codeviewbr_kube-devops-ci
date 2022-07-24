@@ -1,13 +1,15 @@
-name: test-action
+name: test-manual-action
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - 'action.yml'    
+  workflow_dispatch:
+    inputs:
+      command:
+        description: Input a command valid
+        default: aws -version
+        required: true
+       
 jobs:
-  test-image-docker:
+  manual-action:
     runs-on: ubuntu-latest
     steps:
       -
@@ -18,4 +20,4 @@ jobs:
         uses: codeviewbr/kube-devops-ci@v0.2.62
         id: vars
         with:
-          command: aws --version
+          command: ${{ github.event.inputs.command }}
