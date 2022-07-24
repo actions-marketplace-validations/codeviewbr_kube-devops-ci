@@ -57,7 +57,7 @@ helmv3 version
 
 KUBEVAL=0.16.1
 echo "downloading kubeval ${KUBEVAL}"
-curl -sL https://github.com/instrumenta/kubeval/releases/download/${KUBEVAL}/kubeval-linux-amd64.tar.gz | \
+curl -sL https://github.com/instrumenta/kubeval/releases/download/v${KUBEVAL}/kubeval-linux-amd64.tar.gz | \
 tar xz && mv kubeval /usr/local/bin/kubeval
 rm -rf kubeval-linux-amd64.tar.gz
 kubeval --version
@@ -78,8 +78,8 @@ conftest --version
 
 KUBESEAL=0.18.1
 echo "downloading kubeseal ${KUBESEAL}"
-curl -sL https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KUBESEAL}/kubeseal-linux-amd64 \
--o /usr/local/bin/kubeseal && chmod +x /usr/local/bin/kubeseal
+curl -sL https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KUBESEAL}/kubeseal-${KUBESEAL}-linux-amd64.tar.gz | \
+tar xz && mv kubeseal /usr/local/bin/kubeseal
 kubeseal --version
 
 echo "downloading yq"
