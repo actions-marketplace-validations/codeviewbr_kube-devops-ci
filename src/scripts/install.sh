@@ -64,7 +64,6 @@ KUBEVAL=0.16.1
 echo "downloading kubeval ${KUBEVAL}"
 curl -sL https://github.com/instrumenta/kubeval/releases/download/v${KUBEVAL}/kubeval-linux-amd64.tar.gz | \
 tar xz && mv kubeval /usr/local/bin/kubeval
-rm -rf kubeval-linux-amd64.tar.gz
 kubeval --version
 
 KUBEAUDIT=0.19.0
