@@ -5,7 +5,7 @@ on:
     inputs:
       command:
         description: Input a command valid
-        default: aws -version
+        default: aws --version
         required: true
        
 jobs:
