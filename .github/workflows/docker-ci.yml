@@ -60,28 +60,17 @@ jobs:
         run: |
           chmod +x src/scripts/action-version.sh && sh src/scripts/action-version.sh codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: 'trivy-results.sarif'
-
       - uses: actions/setup-node@v1
-
-      - name: Fetch resources
-        run: ./scripts/fetch-resources.sh
-        continue-on-error: true
+      - name: Get message commit 
+        id: msg-commit
+        run: |
+          export MSG=$(git log --format=%B -n 1 $(git log -1 --pretty=format:"%h") | cat -)
+          echo $MSG
 
       - name: Update resources
         uses: test-room-7/action-update-file@v1
         continue-on-error: true
         with:
             file-path: action.yml
-            commit-msg: Update resources
+            commit-msg: Update release ${{ steps.msg-commit.outputs }}
             github-token: ${{ secrets.GIT_TOKEN }}
