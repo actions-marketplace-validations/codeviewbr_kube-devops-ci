@@ -16,9 +16,8 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       - 
-        name: Set kube-ci
+        name: kube-devops-ci
         uses: codeviewbr/kube-devops-ci@v0.2.64
-        id: vars
         env: 
           AWS_REGION: "us-east-1"
           AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
