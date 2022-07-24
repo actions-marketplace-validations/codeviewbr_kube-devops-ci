@@ -2,6 +2,7 @@
 
 set -o errexit
 
+install_dep() {
 apt-get update && \
 apt-get install -y \
 build-essential \
@@ -21,12 +22,17 @@ git \
 wget \
 bash \
 make
+}
 
+
+install_aws_cli() {
 AWS_CLI=""
 echo "install awscli"
 pip3 --no-cache-dir install --upgrade awscli
 aws --version
+}
 
+install_kube_tools() {
 KUBECTL=1.22.12
 echo "downloading kubectl ${KUBECTL}"
 curl -sL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL}/bin/linux/amd64/kubectl \
@@ -82,6 +88,14 @@ curl -sL https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KUB
 tar xz && mv kubeseal /usr/local/bin/kubeseal
 kubeseal --version
 
+KOPS=1.18.3
+echo "downloading kops cli ${KOPS}"
+curl -sL https://github.com/kubernetes/kops/releases/download/v${KOPS}/kops-linux-amd64 \
+-o /usr/local/bin/kops && chmod +x /usr/local/bin/kops
+kops version
+}
+
+install_packages() {
 echo "downloading yq"
 curl -sL https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 \
 -o /usr/local/bin/yq && chmod +x /usr/local/bin/yq
@@ -91,18 +105,21 @@ echo "downloading jq"
 curl -sL https://github.com/stedolan/jq/releases/latest/download/jq-linux64 \
 -o /usr/local/bin/jq && chmod +x /usr/local/bin/jq
 jq --version
+}
 
-KOPS=1.18.3
-echo "downloading kops cli ${KOPS}"
-curl -sL https://github.com/kubernetes/kops/releases/download/v${KOPS}/kops-linux-amd64 \
--o /usr/local/bin/kops && chmod +x /usr/local/bin/kops
-kops version
-
+install_terraform() {
 TERRAFORM=1.2.5
 echo "downloading terraform ${TERRAFORM}"
 wget https://releases.hashicorp.com/terraform/${TERRAFORM}/terraform_${TERRAFORM}_linux_amd64.zip && \
 unzip terraform_${TERRAFORM}_linux_amd64.zip && ls -lsa && mv terraform /usr/local/bin/ && chmod +x /usr/local/bin/terraform
 rm -rf terraform_${TERRAFORM}_linux_amd64.zip
 terraform -v
+}
 
-sudo apt clean
+install_dep &> /dev/null
+install_aws_cli &> /dev/null
+install_kube_tools &> /dev/null
+install_packages &> /dev/null
+install_terraform &> /dev/null
+
+sudo apt clean &> /dev/null
