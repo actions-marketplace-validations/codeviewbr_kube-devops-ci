@@ -24,7 +24,6 @@ bash \
 make
 }
 
-
 install_aws_cli() {
 AWS_CLI=""
 echo "install awscli"
