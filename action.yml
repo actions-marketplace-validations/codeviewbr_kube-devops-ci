@@ -1,6 +1,6 @@
 # action.yml
 name: 'kube-devops-ci'
-description: 'Kubernetes Orchestration tools from using in pipelines'
+description: 'Run the main commands to deploy or build services like kubernetes and aws using CLI.'
 author: 'CodeView Consulting'
 branding:
   icon: 'box'

@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'Dockerfile'
+      - 'action.yml'
       - 'src/scripts/**.sh'
       - 'src/templates/**.tmpl'
 
