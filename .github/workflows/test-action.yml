@@ -6,11 +6,11 @@ on:
       command:
         description: Input a command valid
         default: aws --version
-        required: true
+        required: false
       version:
         description: Input action version
         default: v0.2.64
-        required: true
+        required: false
 
 jobs:
   manual-action:
@@ -21,10 +21,10 @@ jobs:
         uses: actions/checkout@v2
       - 
         name: kube-devops-ci
-        uses: codeviewbr/kube-devops-ci@${{ github.event.inputs.version }}
+        uses: codeviewbr/kube-devops-ci@latest
         env: 
           AWS_REGION: "us-east-1"
           AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}  
         with:
-          command: ${{ github.event.inputs.command }}
+          command: aws --version 

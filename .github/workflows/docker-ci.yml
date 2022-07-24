@@ -58,22 +58,3 @@ jobs:
       - name: Show Tag image
         run: |
           echo "codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}"
-
-      - name: Update Action file
-        run: |
-          chmod +x src/scripts/action-version.sh && sh src/scripts/action-version.sh codeviewbr/kube-devops-ci:${{ steps.tag_version.outputs.new_tag }}
-
-      - uses: actions/setup-node@v1
-      - name: Get message commit 
-        id: msg-commit
-        run: |
-          export MSG=$(git log --format=%B -n 1 $(git log -1 --pretty=format:"%h") | cat -)
-          echo $MSG
-
-      - name: Update resources
-        uses: test-room-7/action-update-file@v1
-        continue-on-error: true
-        with:
-            file-path: action.yml
-            commit-msg: Update release ${{ steps.msg-commit.outputs }}
-            github-token: ${{ secrets.GIT_TOKEN }}
