@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'action.yml'        
   release:
     types: [published]
-    
+  
 jobs:
 
   build_push_image:
@@ -82,4 +84,4 @@ jobs:
         with:
             file-path: action.yml
             commit-msg: Update resources
-            github-token: ${{ secrets.GIT_TOKEN }}             
+            github-token: ${{ secrets.GIT_TOKEN }}

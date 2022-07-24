@@ -34,7 +34,7 @@ curl -sL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL}/b
 kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
 kubectl version --client
 
-KUSTOMIZE=v4.5.4
+KUSTOMIZE=4.5.4
 echo "downloading kustomize ${KUSTOMIZE}"
 curl -sL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE}/kustomize_v${KUSTOMIZE}_linux_amd64.tar.gz | \
 tar xz && mv kustomize /usr/local/bin/kustomize

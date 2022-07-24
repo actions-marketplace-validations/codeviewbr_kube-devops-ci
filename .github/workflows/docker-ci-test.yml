@@ -4,7 +4,8 @@ on:
   pull_request:
     branches:
       - main
-
+    paths-ignore:
+      - 'action.yml'    
 jobs:
   build_test_docker_image:
     runs-on: ubuntu-latest
