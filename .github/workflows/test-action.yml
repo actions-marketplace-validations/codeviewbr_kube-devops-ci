@@ -13,9 +13,9 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
-      #- 
-      #  name: Set kube-ci
-      #  uses: codeviewbr/kube-devops-ci@v0.2.1
-      #  id: vars
-      #  with:
-      #    command: aws --version
+      - 
+        name: Set kube-ci
+        uses: codeviewbr/kube-devops-ci@v0.2.62
+        id: vars
+        with:
+          command: aws --version
