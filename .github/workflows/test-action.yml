@@ -17,7 +17,11 @@ jobs:
         uses: actions/checkout@v2
       - 
         name: Set kube-ci
-        uses: codeviewbr/kube-devops-ci@v0.2.62
+        uses: codeviewbr/kube-devops-ci@v0.2.64
         id: vars
+        env: 
+          AWS_REGION: "us-east-1"
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}  
         with:
           command: ${{ github.event.inputs.command }}
