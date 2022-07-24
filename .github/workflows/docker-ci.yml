@@ -6,7 +6,10 @@ on:
       - main
     paths:
       - 'Dockerfile'
-      - 'src/*'             
+      - 'action.yml'
+      - 'src/scripts/**.sh'
+      - 'src/templates/**.tmpl'
+
   release:
     types: [published]
   
