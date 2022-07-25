@@ -22,9 +22,7 @@ git \
 wget \
 bash \
 make
-}
 
-install_aws_cli() {
 AWS_CLI=""
 echo "install awscli"
 pip3 --no-cache-dir install --upgrade awscli
@@ -114,10 +112,9 @@ rm -rf terraform_${TERRAFORM}_linux_amd64.zip
 terraform -v
 }
 
-install_dep &> /dev/null
-install_aws_cli &> /dev/null
-install_kube_tools &> /dev/null
-install_packages &> /dev/null
-install_terraform &> /dev/null
+install_dep
+install_kube_tools
+install_packages
+install_terraform 
 
-sudo apt clean &> /dev/null
+sudo apt clean 
